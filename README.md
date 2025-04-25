@@ -27,12 +27,11 @@ This project analyzes a dataset of Premier League matches using SQL to uncover t
 
 | Insight | Summary |
 |--------|---------|
-| 📈 Average goals per match | X.XX goals |
-| 🏟️ Highest Attendance Match | `Team A vs Team B`, with `XX,XXX` fans |
-| 🧑‍⚖️ Referee with highest scoring matches | `Referee X` oversaw matches with an avg of `Y.YY` goals |
-| ⚔️ Top scoring team (Year-wise) | `Team X` in `Year YYYY` scored `ZZ` goals |
-| 🛡️ Best defensive team (lowest goals conceded) | `Team Y` in `Year YYYY` |
-| 📊 Monthly scoring trends | (Add image/chart if available) |
+| 📈 Average goals per match | 3 goals |
+| 🏟️ Highest Attendance Match | `Manchester Utd vs Manchester City`, with `75,546` fans |
+| 🧑‍⚖️ Referee with highest scoring matches | `Matt Donohue` oversaw matches with an avg of `4` goals |
+| ⚔️ Top scoring team (Year-wise) | `Manchester City ` in `Year 2022` scored `44` goals |
+| 🛡️ Best defensive team (lowest goals conceded) | `Crystal Palace` in `Year 2025` |
 
 ---
 
