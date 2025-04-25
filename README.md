@@ -43,66 +43,8 @@ Here’s a breakdown of the main SQL queries used:
 ```sql
 SELECT COUNT(*) AS TotalMatches, SUM(homeScore + awayScore) AS TotalGoals FROM Portfolio..PremierLeagueMatches;
 ```
-### 2. Team Performance (Goals Scored/Conceded/Goal Diff)
+ ### 2. Average goals per match under each referee
 ```sql
--- Uses CTEs to calculate goals scored and conceded per team per season.
-;with GoalsScored as (
-select Team,
-year(Date) as MatchYear,
-sum(Goals) as TotalGoalsScored
-
-from (
-select Home_Team as Team,
-Date, 
-homeScore as Goals
-from Portfolio..PremierLeagueMatches
-
-union all
-
-select Away_Team as Team,
-Date, 
-awayScore as Goals
-from Portfolio..PremierLeagueMatches
-) as Scored
-group by Team, year(Date)
-), 
-
--- Common Table Expression for Goals Conceded
-GoalsConceded as (
-select Team,
-year(Date) as MatchYear, 
-sum(Goals) as TotalGoalsConceded
-
-from (
-select Home_Team as Team,
-Date,
-awayScore as Goals
-from Portfolio..PremierLeagueMatches
-
-union all
-
-select Away_Team as Team,
-Date,
-homeScore as Goals
-from Portfolio..PremierLeagueMatches
-) as Conceded
-group by Team, year(Date)
-)
-
--- Final select: Joining both CTEs
-select
-gs.Team,
-gs.MatchYear,
-gs.TotalGoalsScored,
-gc.TotalGoalsConceded,
-(gs.TotalGoalsScored - gc.TotalGoalsConceded) as GoalDifference
-from GoalsScored gs join GoalsConceded gc
-on gs.Team = gc.Team and gs.MatchYear = gc.MatchYear
-order by gs.MatchYear, GoalDifference desc
-```
- ### 3. Average goals per match under each referee
-```sql
--- Average goals per match under each referee
 select Referee,
 count(*) as total_matches,
 avg(homeScore + awayScore) as avg_goals_per_match
@@ -110,4 +52,16 @@ from Portfolio..PremierLeagueMatches
 where Referee is not null
 group by Referee
 order by avg_goals_per_match desc
+```
+### 3. Highest attendance in any specific match
+```sql
+select top 5 * from Portfolio..PremierLeagueMatches
+order by Attendance DESC;
+```
+
+### 4. Date Range
+```sql
+select 
+min(Date) as first_match, max(Date) as last_match
+from Portfolio..PremierLeagueMatches
 ```
