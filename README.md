@@ -100,3 +100,14 @@ from GoalsScored gs join GoalsConceded gc
 on gs.Team = gc.Team and gs.MatchYear = gc.MatchYear
 order by gs.MatchYear, GoalDifference desc
 ```
+ ### 3. Average goals per match under each referee
+```sql
+-- Average goals per match under each referee
+select Referee,
+count(*) as total_matches,
+avg(homeScore + awayScore) as avg_goals_per_match
+from Portfolio..PremierLeagueMatches
+where Referee is not null
+group by Referee
+order by avg_goals_per_match desc
+```
