@@ -65,3 +65,10 @@ select
 min(Date) as first_match, max(Date) as last_match
 from Portfolio..PremierLeagueMatches
 ```
+
+## 👋 Contact
+
+**Created by**: *Saidul Islam*  
+📧 Email: *23303345@iubat.edu*  
+🔗 [LinkedIn](https://www.linkedin.com/in/saidulislam2003)  
+🔗 [GitHub](https://github.com/saidulislam2003)
