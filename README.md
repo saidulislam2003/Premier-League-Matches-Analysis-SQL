@@ -23,6 +23,26 @@ This project analyzes a dataset of Premier League matches using SQL to uncover t
 
 ---
 
+## 📌 Project Structure
+
+```bash
+📁 PremierLeague_SQL_Project/
+│
+├── PremierLeagueMatches.csv      # Cleaned dataset
+├── PremierLeagueMatches.sql      # All SQL queries
+├── README.md                     # This file
+```
+
+## 🧩 Data Understanding & Cleaning
+
+Before querying, I ensured the dataset was ready:
+- Checked for **nulls and inconsistent values**
+- Standardized **date format** for time-based analysis
+- Verified **team name consistency** to avoid duplicates
+- Cleaned rows with missing scores or referees (if any)
+
+---
+
 ## 🧠 Key Insights
 
 | Insight | Summary |
@@ -65,6 +85,13 @@ select
 min(Date) as first_match, max(Date) as last_match
 from Portfolio..PremierLeagueMatches
 ```
+## 🛠️ Tools Used
+
+- **SQL Server Management Studio (SSMS)** – query execution
+- **Excel** – initial data formatting
+- **GitHub** – version control and project showcase
+
+---
 
 ## 👋 Contact
 
