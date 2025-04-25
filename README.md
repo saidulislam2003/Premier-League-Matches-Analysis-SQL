@@ -7,7 +7,7 @@ This project analyzes a dataset of Premier League matches using SQL to uncover t
 ## 📁 Dataset Overview
 
 - **File**: `PremierLeagueMatches.csv`
-- **Records**: ~X rows (matches)
+- **Records**: ~1141 rows (matches)
 - **Columns**: Date, Home Team, Away Team, Scores, Referee, Attendance, Result, etc.
 - **Source**: Premier League match data (uploaded manually)
 
