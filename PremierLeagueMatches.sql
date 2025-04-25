@@ -83,9 +83,66 @@ from Portfolio..PremierLeagueMatches) as combinedresults
 group by Team
 order by Wins desc
 
+-- Average goals per match under each referee
+select Referee,
+count(*) as total_matches,
+avg(homeScore + awayScore) as avg_goals_per_match
+from Portfolio..PremierLeagueMatches
+where Referee is not null
+group by Referee
+order by avg_goals_per_match desc
 
+-- Common Table Expression for Goals Scored
+;with GoalsScored as (
+select Team,
+year(Date) as MatchYear,
+sum(Goals) as TotalGoalsScored
 
+from (
+select Home_Team as Team,
+Date, 
+homeScore as Goals
+from Portfolio..PremierLeagueMatches
 
+union all
 
+select Away_Team as Team,
+Date, 
+awayScore as Goals
+from Portfolio..PremierLeagueMatches
+) as Scored
+group by Team, year(Date)
+), 
 
+-- Common Table Expression for Goals Conceded
+GoalsConceded as (
+select Team,
+year(Date) as MatchYear, 
+sum(Goals) as TotalGoalsConceded
 
+from (
+select Home_Team as Team,
+Date,
+awayScore as Goals
+from Portfolio..PremierLeagueMatches
+
+union all
+
+select Away_Team as Team,
+Date,
+homeScore as Goals
+from Portfolio..PremierLeagueMatches
+) as Conceded
+group by Team, year(Date)
+)
+
+-- Final select: Joining both CTEs
+select
+gs.Team,
+gs.MatchYear,
+gs.TotalGoalsScored,
+gc.TotalGoalsConceded,
+(gs.TotalGoalsScored - gc.TotalGoalsConceded) as GoalDifference
+from GoalsScored gs join GoalsConceded gc
+on gs.Team = gc.Team and gs.MatchYear = gc.MatchYear
+order by gs.MatchYear, GoalDifference desc
